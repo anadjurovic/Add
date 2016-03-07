@@ -4,28 +4,28 @@ with  Ada.Text_IO; use Ada.Text_IO;
 with Ada.Calendar; use  Ada.Calendar;
 with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Calendar.Formatting;
+with P_Input; use P_Input;
 
 procedure Main is
 
+   task  Addition;
+   task body Addition is
+      Waiting_Delay: Duration := 0.1;
 
-
-   task  Direction;
-   task body Direction is
-      Delai_Attente: Duration := 0.1;
-      var : comp_Input:= (1.0, 2.0);
-      vout : comp_Output;
-      i : Integer:=0;
+      Output : comp_Output;
+      Index_Task : Integer:=1;
    begin
       loop
-         exit when i = 10;
-         delay until (clock + Delai_Attente);
-         comp(var, vout);
-         i := i+1;
+         exit when Index_Task = 11;
+         delay until (clock + Waiting_Delay);
+
+         comp(Input(Index_Task), Output);
+
+         Index_Task := Index_Task + 1;
+
       end loop;
-   end Direction;
+   end Addition;
 
 begin
-
    null;
-
 end Main;
