@@ -26,7 +26,7 @@ procedure Main is
 
 
       --------------------------------------------------------------------------
-      Vinput     : Input_Array;
+      Input     : Input_Array;
 
       --------------------------------------------------------------------------
       Output     : comp_Output;
@@ -48,7 +48,7 @@ procedure Main is
             Ada.Long_Float_Text_IO.Get (File_Input, C);
             Ada.Text_IO.Get (File_Input, B);
             Ada.Long_Float_Text_IO.Get (File_Input, D);
-            Vinput (Index_Input) := (In1 => C, In2 => D);
+            Input (Index_Input) := (In1 => C, In2 => D);
             Skip_Line (File_Input, 1);
 
          end if;
@@ -69,8 +69,9 @@ procedure Main is
          exit when Index_Task = 11;
          delay until (Clock + Waiting_Delay);
 
-         comp (Vinput (Index_Task), Output);
+         comp (Input (Index_Task), Output);
          Ada.Long_Float_Text_IO.Get (Expected, E);
+         Put("     Expected : " &Long_Float'Image(E));
          Put_Line ("  " & Boolean'Image (E = Output.Out1));
          Skip_Line (Expected, 1);
          Index_Task := Index_Task + 1;
