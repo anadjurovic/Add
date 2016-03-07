@@ -26,7 +26,7 @@ package body add is
       --  Block add/In2
       --  Block add/Out1
       Output.Out1 := (Input.In1) + (Input.In2);
-      Put_Line(Long_Float'Image(Output.Out1));
+      Put(Long_Float'Image(Output.Out1));
       --  End Block add/Out1
       --  End Block add/In2
       --  End Block add/In1
