@@ -12,11 +12,11 @@ procedure Main is
    task Addition;
    task body Addition is
       Waiting_Delay : Duration := 0.1;
-      File_Input    : File_Type;
+      File_Input, Expected    : File_Type;
       Vinput        : Input_Array;
       Output        : comp_Output;
       Index_Task    : Integer  := 1;
-      C, D          : Long_Float;
+      C, D, E       : Long_Float;
       B             : String (1 .. 1);
       i             : Integer  := 1;
    begin
@@ -36,13 +36,23 @@ procedure Main is
       end loop;
       Ada.Text_IO.Close (File_Input);
 
+      Ada.Text_IO.Open (Expected, Mode => In_File, Name => "expected.csv");
+
       loop
          exit when Index_Task = 11;
          delay until (Clock + Waiting_Delay);
          comp (Vinput (Index_Task), Output);
+         Ada.Long_Float_Text_IO.Get (Expected, E);
+
+         if E=Output.Out1
+         then Put_Line("True");
+         else Put_Line("False");
+         end if;
+         Skip_Line (Expected, 1);
          Index_Task := Index_Task + 1;
 
       end loop;
+      Ada.Text_IO.Close (Expected);
    end Addition;
 
 begin
